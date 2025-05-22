@@ -1,2 +1,2 @@
 # Hotel-Management-System
-A fullu functional system for managing hotels
+A fully functional system for managing hotels

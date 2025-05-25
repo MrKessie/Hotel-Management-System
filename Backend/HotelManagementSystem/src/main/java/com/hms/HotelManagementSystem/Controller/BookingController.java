@@ -1,8 +1,8 @@
 package com.hms.HotelManagementSystem.Controller;
 
-import com.hms.HotelManagementSystem.Model.User;
-import com.hms.HotelManagementSystem.Repository.UserRepository;
-import com.hms.HotelManagementSystem.Service.UserService;
+import com.hms.HotelManagementSystem.Model.Booking;
+import com.hms.HotelManagementSystem.Repository.BookingRepository;
+import com.hms.HotelManagementSystem.Service.BookingService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,30 +14,31 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/user")
-public class UserController {
+@RequestMapping("/api/booking")
+public class BookingController {
     @Autowired
-    UserService userService;
+    BookingService bookingService;
 
     @Autowired
-    UserRepository userRepository;
+    BookingRepository bookingRepository;
+
 
     @PostMapping("/create")
     @ResponseBody
-    public ResponseEntity<?> createUser(@Valid @RequestBody User user) {
+    public ResponseEntity<?> createBooking(@Valid @RequestBody Booking booking) {
         try {
-            User createUser = userService.createUser(user);
+            Booking createBooking = bookingService.createBooking(booking);
             Map<String, Object> response = new HashMap<>();
             response.put("success", true);
-            response.put("message", "User created successfully");
-            response.put("data", createUser);
+            response.put("message", "Booking created successfully");
+            response.put("data", createBooking);
 
             return ResponseEntity.ok(response);
         }
         catch (Exception ex) {
             Map<String, Object> response = new HashMap<>();
             response.put("success", false);
-            response.put("message", "Error creating user: " + ex.getMessage());
+            response.put("message", "Error creating booking: " + ex.getMessage());
 
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
@@ -45,26 +46,26 @@ public class UserController {
 
     @GetMapping("/all-users")
     @ResponseBody
-    public List<User> userList() {
-        List<User> users = userService.userList();
-        return users;
+    public List<Booking> bookingList() {
+        List<Booking> bookings = bookingService.bookingList();
+        return bookings;
     }
 
-    @PostMapping("/delete/{userId}")
+    @PostMapping("/delete/{bookingId}")
     @ResponseBody
-    public ResponseEntity<?> deleteUser(@PathVariable int userId) {
+    public ResponseEntity<?> deleteBooking(@PathVariable int bookingId) {
         try {
-            if (userRepository.existsById(userId)) {
-                boolean deletedUser = userService.deleteUser(userId);
+            if (bookingRepository.existsById(bookingId)) {
+                boolean deletedBooking = bookingService.deleteBooking(bookingId);
                 Map<String, Object> response = new HashMap<>();
                 response.put("success", true);
-                response.put("message", "User deleted successfully");
-                response.put("data", deletedUser);
+                response.put("message", "Booking deleted successfully");
+                response.put("data", deletedBooking);
 
                 return ResponseEntity.ok(response);
             }
             else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User with ID: " + userId + " not found.");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Booking with ID: " + bookingId + " not found.");
             }
         }
         catch (Exception ex) {
@@ -75,5 +76,4 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
-
 }

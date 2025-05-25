@@ -1,8 +1,8 @@
 package com.hms.HotelManagementSystem.Controller;
 
-import com.hms.HotelManagementSystem.Model.User;
-import com.hms.HotelManagementSystem.Repository.UserRepository;
-import com.hms.HotelManagementSystem.Service.UserService;
+import com.hms.HotelManagementSystem.Model.Payment;
+import com.hms.HotelManagementSystem.Repository.PaymentRepository;
+import com.hms.HotelManagementSystem.Service.PaymentService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -14,57 +14,58 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/user")
-public class UserController {
+@RequestMapping("/api/payment")
+public class PaymentController {
     @Autowired
-    UserService userService;
+    PaymentService paymentService;
 
     @Autowired
-    UserRepository userRepository;
+    PaymentRepository paymentRepository;
+
 
     @PostMapping("/create")
     @ResponseBody
-    public ResponseEntity<?> createUser(@Valid @RequestBody User user) {
+    public ResponseEntity<?> createUser(@Valid @RequestBody Payment payment) {
         try {
-            User createUser = userService.createUser(user);
+            Payment createPayment = paymentService.createPayment(payment);
             Map<String, Object> response = new HashMap<>();
             response.put("success", true);
-            response.put("message", "User created successfully");
-            response.put("data", createUser);
+            response.put("message", "Payment created successfully");
+            response.put("data", createPayment);
 
             return ResponseEntity.ok(response);
         }
         catch (Exception ex) {
             Map<String, Object> response = new HashMap<>();
             response.put("success", false);
-            response.put("message", "Error creating user: " + ex.getMessage());
+            response.put("message", "Error creating payment: " + ex.getMessage());
 
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
 
-    @GetMapping("/all-users")
+    @GetMapping("/all-payments")
     @ResponseBody
-    public List<User> userList() {
-        List<User> users = userService.userList();
-        return users;
+    public List<Payment> paymentList() {
+        List<Payment> payments = paymentService.paymentList();
+        return payments;
     }
 
-    @PostMapping("/delete/{userId}")
+    @PostMapping("/delete/{paymentId}")
     @ResponseBody
-    public ResponseEntity<?> deleteUser(@PathVariable int userId) {
+    public ResponseEntity<?> deletePayment(@PathVariable int paymentId) {
         try {
-            if (userRepository.existsById(userId)) {
-                boolean deletedUser = userService.deleteUser(userId);
+            if (paymentRepository.existsById(paymentId)) {
+                boolean deletedPayment = paymentService.deletePayment(paymentId);
                 Map<String, Object> response = new HashMap<>();
                 response.put("success", true);
-                response.put("message", "User deleted successfully");
-                response.put("data", deletedUser);
+                response.put("message", "Payment deleted successfully");
+                response.put("data", deletedPayment);
 
                 return ResponseEntity.ok(response);
             }
             else {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("User with ID: " + userId + " not found.");
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Payment with ID: " + paymentId + " not found.");
             }
         }
         catch (Exception ex) {
@@ -75,5 +76,4 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }
     }
-
 }

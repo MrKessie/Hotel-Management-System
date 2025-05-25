@@ -58,6 +58,9 @@ public class User {
     private LocalDateTime updatedDate;
 
 
+    public User() {
+    }
+
     public User(@NotNull(message = "First Name cannot be null") String firstName, @NotNull(message = "Last Name cannot be null") String lastName, @NotNull(message = "Username cannot be null") String username, String email, String password, String phoneNumber, Role role, Status status, LocalDateTime createdDate, LocalDateTime updatedDate) {
         this.firstName = firstName;
         this.lastName = lastName;

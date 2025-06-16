@@ -16,7 +16,7 @@ public class Payment {
     private int paymentId;
     @OneToOne
     @JoinColumn(name = "booking_id")
-    private Booking bookingId;
+    private Booking booking;
     private double amount;
     private LocalDate paymentDate;
     @NotNull(message = "Method cannot be null")
@@ -38,8 +38,8 @@ public class Payment {
     public Payment() {
     }
 
-    public Payment(Booking bookingId, double amount, LocalDate paymentDate, @NotNull(message = "Method cannot be null") PaymentMethod method, @NotNull(message = "Status cannot be null") PaymentStatus status, int transactionId, String notes, LocalDateTime createdDate, LocalDateTime updatedDate) {
-        this.bookingId = bookingId;
+    public Payment(Booking booking, double amount, LocalDate paymentDate, @NotNull(message = "Method cannot be null") PaymentMethod method, @NotNull(message = "Status cannot be null") PaymentStatus status, int transactionId, String notes, LocalDateTime createdDate, LocalDateTime updatedDate) {
+        this.booking = booking;
         this.amount = amount;
         this.paymentDate = paymentDate;
         this.method = method;
@@ -58,12 +58,12 @@ public class Payment {
         this.paymentId = paymentId;
     }
 
-    public Booking getBookingId() {
-        return bookingId;
+    public Booking getBooking() {
+        return booking;
     }
 
-    public void setBookingId(Booking bookingId) {
-        this.bookingId = bookingId;
+    public void setBooking(Booking booking) {
+        this.booking = booking;
     }
 
     public double getAmount() {

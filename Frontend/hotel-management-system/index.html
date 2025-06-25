@@ -1,13 +1,58 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-layout-mode="detached">
   <head>
     <meta charset="UTF-8" />
+    <title id="pageTitle">KCUBE Hotel</title>
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + React</title>
+    <meta content="Hotel management system." name="description" />
+  <meta content="Kessie" name="author" />
+
+  <!-- App favicon -->
+        <link rel="shortcut icon" href="inner/assets/images/favicon.ico">
+
+        <!-- plugin css -->
+        <link href="outer/assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet" type="text/css" />
+
+        <!-- Theme Config Js -->
+        <script src="inner/assets/js/head.js"></script>
+
+        <!-- Bootstrap css -->
+        <link href="inner/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" id="app-style" />
+
+        <!-- App css -->
+        <link href="inner/assets/css/app.min.css" rel="stylesheet" type="text/css" />
+
+        <!-- Icons css -->
+        <link href="outer/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
+
+
+
+        
+
+        <!-- Plugins js-->
+        <script src="outer/assets/libs/jquery-sparkline/jquery.sparkline.min.js"></script>
+        <script src="outer/assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js"></script>
+        <script src="outer/assets/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js"></script>
+
+        <!-- Dashboard 2 init -->
+        <script src="inner/assets/js/pages/dashboard-2.init.js"></script>
   </head>
-  <body>
+
+
+  <body class="authentication-bg position-relative">
+
     <div id="root"></div>
+    
     <script type="module" src="/src/main.jsx"></script>
+
+    <!-- Vendor js -->
+    <script src="inner/assets/js/vendor.min.js"></script>
+
+    <!-- App js -->
+    <script src="inner/assets/js/app.min.js"></script>
+
+
   </body>
+
 </html>

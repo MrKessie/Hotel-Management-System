@@ -30,7 +30,7 @@ public class Room {
     @Convert(converter = StringListConverter.class)
     private List<String> features;
     @NotNull(message = "Description cannot be null")
-    @Size(min = 2, message = "Description must have at least 2 characters")
+    @Size(min = 10, message = "Description must have at least 10 characters")
     private String description;
     @CreationTimestamp
     @Column(nullable = false, updatable = false)

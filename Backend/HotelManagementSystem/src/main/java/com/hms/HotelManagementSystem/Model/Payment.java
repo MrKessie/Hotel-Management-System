@@ -17,6 +17,7 @@ public class Payment {
     @OneToOne
     @JoinColumn(name = "booking_id")
     private Booking booking;
+    @NotNull(message = "Amount cannot be null")
     private double amount;
     private LocalDate paymentDate;
     @NotNull(message = "Method cannot be null")

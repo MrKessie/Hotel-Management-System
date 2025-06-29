@@ -71,7 +71,7 @@ public class BookingController {
         catch (Exception ex) {
             Map<String, Object> response = new HashMap<>();
             response.put("success", false);
-            response.put("message", "Error deleting user: " + ex.getMessage());
+            response.put("message", "Error deleting booking: " + ex.getMessage());
 
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(response);
         }

@@ -14,7 +14,7 @@ public class RoomService {
 
     public Room createRoom(Room room) {
         if (roomRepository.existsByRoomNumber(room.getRoomNumber())) {
-            throw new IllegalArgumentException("Username already exists");
+            throw new IllegalArgumentException("Room number already exists");
         }
 
         return room;

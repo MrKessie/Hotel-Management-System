@@ -8,18 +8,16 @@ import org.hibernate.annotations.CreationTimestamp;
 import java.time.LocalDateTime;
 
 @Entity
-public class Department {
+public class Amenity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int departmentId;
-    @NotNull(message = "Department Name cannot be null")
-    @Size(min = 2, max = 20,  message = "Department Name must have at least 2 characters")
-    private String departmentName;
+    private int amenityId;
+    @NotNull(message = "Amenity Name cannot be null")
+    @Size(min = 10, message = "Amenity Name must have at least 10 characters")
+    private int amenityName;
     @NotNull(message = "Description cannot be null")
     @Size(min = 10, message = "Description must have at least 10 characters")
     private String description;
-    @OneToOne(mappedBy = "department", cascade = CascadeType.ALL)
-    private Staff manager;
     @CreationTimestamp
     @Column(nullable = false, updatable = false)
     private LocalDateTime createdDate;
@@ -28,31 +26,31 @@ public class Department {
     private LocalDateTime updatedDate;
 
 
-    public Department() {
+    public Amenity() {
     }
 
-    public Department(@NotNull(message = "Department Name cannot be null") String departmentName, String description, Staff manager, LocalDateTime createdDate, LocalDateTime updatedDate) {
-        this.departmentName = departmentName;
+    public Amenity(@NotNull(message = "Amenity Name cannot be null") int amenityName, @NotNull(message = "Description cannot be null") String description, LocalDateTime createdDate, LocalDateTime updatedDate) {
+        this.amenityName = amenityName;
         this.description = description;
-        this.manager = manager;
-        this.createdDate = LocalDateTime.now();
-        this.updatedDate = LocalDateTime.now();
+        this.createdDate = createdDate;
+        this.updatedDate = updatedDate;
     }
 
-    public int getDepartmentId() {
-        return departmentId;
+
+    public int getAmenityId() {
+        return amenityId;
     }
 
-    public void setDepartmentId(int departmentId) {
-        this.departmentId = departmentId;
+    public void setAmenityId(int amenityId) {
+        this.amenityId = amenityId;
     }
 
-    public String getDepartmentName() {
-        return departmentName;
+    public int getAmenityName() {
+        return amenityName;
     }
 
-    public void setDepartmentName(String departmentName) {
-        this.departmentName = departmentName;
+    public void setAmenityName(int amenityName) {
+        this.amenityName = amenityName;
     }
 
     public String getDescription() {
@@ -61,14 +59,6 @@ public class Department {
 
     public void setDescription(String description) {
         this.description = description;
-    }
-
-    public Staff getManager() {
-        return manager;
-    }
-
-    public void setManager(Staff manager) {
-        this.manager = manager;
     }
 
     public LocalDateTime getCreatedDate() {
